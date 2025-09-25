@@ -1,0 +1,7 @@
+streamlit
+pydantic
+pandas
+numpy
+scikit-learn
+jinja2
+python-docx
