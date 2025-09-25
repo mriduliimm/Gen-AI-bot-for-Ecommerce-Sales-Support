@@ -1,0 +1,49 @@
+# {{ title }}
+
+**Company:** {{ company }}  
+**Industry:** {{ industry }} | **Region:** {{ region }}  
+**Primary Use-case:** {{ use_case }}
+
+---
+## Executive Summary
+{{ solution_overview }}
+
+## Objectives
+{% for o in objectives %}- {{ o }}
+{% endfor %}
+
+## Proposed Solution
+The following components address the requirements:
+{% for s in selected_skus %}- **{{ s.name }}** (SKU: {{ s.sku }}) — {{ s.reason }}
+{% endfor %}
+
+## High-level Architecture
+{% for a in architecture %}- **{{ a.component }}**: {{ a.role }}
+{% endfor %}
+
+## Implementation Plan
+| Phase | Duration (weeks) |
+|------|-------------------|
+{% for p in implementation_plan %}| {{ p.phase }} | {{ p.weeks }} |
+{% endfor %}
+
+## Commercials ({{ pricing_breakdown['currency'] }})
+| Item | SKU | Qty | Subtotal |
+|------|-----|-----|----------|
+{% for it in pricing_breakdown['items'] -%}
+| {{ it.name }} | {{ it.sku }} | {{ it.qty }} | {{ pricing_breakdown['currency'] }} {{ '%.2f'|format(it.subtotal) }} |
+{% endfor %}
+
+**Subtotal:** {{ pricing_breakdown['currency'] }} {{ '%.2f'|format(pricing_breakdown['subtotal']) }}
+**Discount ({{ pricing_breakdown['discount_pct'] }}%)**: -{{ pricing_breakdown['currency'] }} {{ '%.2f'|format(pricing_breakdown['discount_amount']) }}
+**Tax ({{ pricing_breakdown['tax_pct'] }}%)**: {{ pricing_breakdown['currency'] }} {{ '%.2f'|format(pricing_breakdown['tax_amount']) }}
+**Total:** **{{ pricing_breakdown['currency'] }} {{ '%.2f'|format(pricing_breakdown['total']) }}**
+
+
+## Assumptions & Terms
+{% for a in assumptions %}- {{ a }}
+{% endfor %}
+
+## Citations
+{% for c in citations %}- {{ c }}
+{% endfor %}
